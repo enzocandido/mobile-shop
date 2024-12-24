@@ -3,15 +3,17 @@ import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Icon } from "@/components/ui/icon";
-import { ShoppingCart } from "lucide-react-native";
+import { ShoppingCart, User } from "lucide-react-native";
 import { Pressable } from "react-native";
 import { useCart } from "@/store/cartStore";
 import { Text } from "@/components/ui/text";
+import { useAuth } from "@/store/authStore";
 
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const cartitemsNum = useCart((state) => state.items.length);
+  const isLoggedIn = useAuth((s) => !!s.token);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -29,7 +31,20 @@ export default function RootLayout() {
               ),
           }}
         >
-          <Stack.Screen name="index" options={{ title: "Shop" }} />
+          <Stack.Screen
+            name="index"
+            options={{
+              title: "Shop",
+              headerLeft: () =>
+                !isLoggedIn && (
+                  <Link href={"/login"} asChild>
+                    <Pressable className="flex-row gap-2">
+                      <Icon as={User} />
+                    </Pressable>
+                  </Link>
+                ),
+            }}
+          />
           <Stack.Screen name="product/[id]" options={{ title: "Product" }} />
         </Stack>
       </GluestackUIProvider>
