@@ -35,17 +35,33 @@ export default function RootLayout() {
             name="index"
             options={{
               title: "Shop",
+              headerTitleAlign: "center",
               headerLeft: () =>
-                !isLoggedIn && (
-                  <Link href={"/login"} asChild>
+               
+                  <Link href={isLoggedIn ? "/profile" : "/login"} asChild>
                     <Pressable className="flex-row gap-2">
                       <Icon as={User} />
                     </Pressable>
                   </Link>
-                ),
+                
             }}
           />
-          <Stack.Screen name="product/[id]" options={{ title: "Product" }} />
+          <Stack.Screen
+            name="product/[id]"
+            options={{ title: "Product", headerTitleAlign: "center" }}
+          />
+          <Stack.Screen
+            name="(auth)/login"
+            options={{ title: "Login", headerTitleAlign: "center" }}
+          />
+          <Stack.Screen
+            name="cart"
+            options={{ title: "Cart", headerTitleAlign: "center" }}
+          />
+          <Stack.Screen
+            name="profile"
+            options={{ title: "My Profile", headerTitleAlign: "center" }}
+          />
         </Stack>
       </GluestackUIProvider>
     </QueryClientProvider>

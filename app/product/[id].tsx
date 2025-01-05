@@ -14,9 +14,7 @@ import { useCart } from "@/store/cartStore";
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  const addProduct = useCart((state) => state.addProduct);
-  const cartItems = useCart((state) => state.items);
-  console.log(JSON.stringify(cartItems, null, 2));
+  const addProduct = useCart((state: any) => state.addProduct);
 
   const addToCart = () => {
     addProduct(product);

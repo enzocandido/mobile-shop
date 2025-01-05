@@ -61,11 +61,11 @@ export default function LoginScreen() {
 
   return (
     <FormControl
-      isInvalid={loginMutation.error || signupMutation.error}
+      isInvalid={!!loginMutation.error || !!signupMutation.error}
       className="p-4 border rounded-lg max-w-[500px] border-outline-300 bg-white m-2"
     >
       <VStack space="xl">
-        <Heading className="text-typography-900 pt-3">Login</Heading>
+        <Heading className="text-typography-900 pt-3">Welcome</Heading>
         <VStack space="xs">
           <Text className="text-typography-500">Email</Text>
           <Input className="min-w-[250px]">
